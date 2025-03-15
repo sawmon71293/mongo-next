@@ -17,6 +17,25 @@ const getTopic = async () => {
         console.log(error)
     }
 }
+
+
+const handleDelete = async (_id: string) => {
+    console.log('id here>>>>>>>>', _id)
+    try {
+        const result = await fetch(`http://localhost:3000/api/topics/id=${_id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json"
+            },
+        })
+        if (!result.ok) {
+            throw new Error("Failed to delete the topic!");
+        }
+    } catch (error) {
+        console.log(error)
+    }
+};
+
 export default async function TopicLists() {
 
     const { topics } = await getTopic();
@@ -29,7 +48,7 @@ export default async function TopicLists() {
                         <div>{top.description}</div>
                     </div>
                     <div className="flex gap-2">
-                        <Removebtn />
+                        <Removebtn onClick={() => handleDelete(top._id)} />
                         <Link href={`/editTopic/${top._id}`}><HiPencilAlt size={24} /></Link>
                     </div>
                 </div>))}
