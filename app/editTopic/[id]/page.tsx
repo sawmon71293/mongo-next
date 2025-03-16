@@ -13,7 +13,7 @@ const getTopicById = async (id: string) => {
 
 }
 
-export default async function editTopic({ params }) {
+export default async function editTopic({ params }: { params: { id: string } }) {
     const { id } = await params
     const { topic } = await getTopicById(id)
     return (<div>
