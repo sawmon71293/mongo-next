@@ -1,10 +1,22 @@
-"use client";
+import Editform from '@/components/EditForm'
 
-import FormCom from "@/components/FormCom";
+const getTopicById = async (id: string) => {
+    try {
+        const res = await fetch(`http://localhost:3000/api/topics/${id}`);
+        if (!res.ok) {
+            throw new Error("Failed to fetch the topic")
+        }
+        return res.json()
+    } catch (error) {
+        console.log(error)
+    }
 
-export default function editTopic() {
+}
+
+export default async function editTopic({ params }) {
+    const { id } = await params
+    const { topic } = await getTopicById(id)
     return (<div>
-        <h1>Update Topic</h1>
-        <FormCom />
+        <Editform topic={topic} />
     </div>)
 }

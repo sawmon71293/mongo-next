@@ -1,15 +1,35 @@
+'use client'
 import { Handlee } from "next/font/google";
 import { HiOutlineTrash } from "react-icons/hi"
+import { useRouter } from "next/navigation";
 
 interface RemoveBtnProps {
-    onClick: (id: string) => void;
-    disabled?: boolean;
+    id: string
 }
 
-export default function Removebtn({ }: RemoveBtnProps) {
+export default function Removebtn({ id }: RemoveBtnProps) {
+    const router = useRouter()
+    const removeTopic = async (id: string) => {
+        const confirmed = confirm('Are you sure to delete this topic!')
+        if (confirmed) {
+            try {
+                const result = await fetch(`http://localhost:3000/api/topics?id=${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                })
+                if (result.ok) {
+                    router.refresh()
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        };
+    }
 
     return (<>
-        <button className="text-red-400 rounded">
+        <button onClick={() => removeTopic(id)} className="text-red-400 rounded">
             <HiOutlineTrash size={24} />
         </button>
     </>)

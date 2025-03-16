@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { FormEvent } from "react";
 
-export default function FormCom() {
+export default async function FormCom(id: string) {
+
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-
     const router = useRouter()
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!title || !description) {
             alert("title and description are required!")
@@ -30,9 +32,10 @@ export default function FormCom() {
             console.log(error)
         }
     };
+
     return <div><form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input onChange={(e) => { setTitle(e.target.value) }} value={title} className="border border-slate-500 px-8 py-2 rounded" type="text" placeholder="Topic Title" />
         <input onChange={(e) => { setDescription(e.target.value) }} value={description} className="border border-slate-500 px-8 py-2 rounded" type="text" placeholder="Topic Description" />
-        <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit rounded">Add Topic</button>
+        <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit rounded">{id ? 'Update' : 'Add'}</button>
     </form></div>
 }

@@ -1,6 +1,5 @@
 import connectDB from "@/libs/mongodb";
 import Topic from "@/models/topic";
-import { connect } from "http2";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
