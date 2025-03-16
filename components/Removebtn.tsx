@@ -1,5 +1,4 @@
 'use client'
-import { Handlee } from "next/font/google";
 import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation";
 

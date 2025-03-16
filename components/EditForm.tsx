@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function editing({ topic }: { topic: { _id: string; title: string; description: string } }) {
+export default function Editing({ topic }: { topic: { _id: string; title: string; description: string } }) {
 
     const [title, setTitle] = useState(topic?.title || "")
     const [description, setDescription] = useState(topic?.description || "")
@@ -45,6 +45,7 @@ export default function editing({ topic }: { topic: { _id: string; title: string
                     <input value={description ?? ''} onChange={(e) => { setDescription(e.target.value) }} className="border border-slate-500 px-8 py-2 rounded" type="text" placeholder="Topic Description" />
                     <button type="submit" className="bg-green-600 font-bold text-white py-3 px-6 w-fit rounded">update</button>
                 </form>
-            </div> : <p>Loading ...</p>}
+            </div>
+            : <p>Loading ...</p>}
     </div>)
 }

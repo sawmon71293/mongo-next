@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { FormEvent } from "react";
 
-export default async function FormCom(id: string) {
+export default function FormCom(id: string) {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
