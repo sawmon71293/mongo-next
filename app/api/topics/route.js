@@ -10,7 +10,7 @@ export async function POST(request) {
     return NextResponse.json({ message: "topic created" }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed creating topic" },
+      { message: `Failed creating topic, ${error}` },
       { status: 500 }
     );
   }
@@ -23,7 +23,7 @@ export async function GET() {
     return NextResponse.json({ topics });
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed finding topic" },
+      { error: `Failed to find topic, ${error}` },
       { status: 500 }
     );
   }
@@ -40,7 +40,7 @@ export async function DELETE(request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed deleting topic" },
+      { error: `Failed to delete topic, ${error}` },
       { status: 500 }
     );
   }

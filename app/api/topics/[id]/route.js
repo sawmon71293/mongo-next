@@ -12,7 +12,7 @@ export async function PUT(request, { params }) {
     return NextResponse.json({ message: "Topic Edited" }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to edit topic" },
+      { error: `Failed to edit topic, ${error}` },
       { status: 500 }
     );
   }
@@ -26,7 +26,7 @@ export async function GET(request, { params }) {
     return NextResponse.json({ topic }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to find topic" },
+      { error: `Failed to find topic, ${error}` },
       { status: 500 }
     );
   }
@@ -40,7 +40,7 @@ export async function DELETE(request) {
     return NextResponse.json({ topic }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to delete topic" },
+      { error: `Failed to delete topic, ${error}` },
       { status: 500 }
     );
   }
