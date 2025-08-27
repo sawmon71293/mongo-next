@@ -20,9 +20,11 @@ export async function PUT(request, { params }) {
 
 export async function GET(request, { params }) {
   try {
+    console.log("id is ===>", params.id);
     const { id } = await params;
     await connectDB();
     const topic = await Topic.findOne({ _id: id });
+    console.log("Topic was fetched>>>>", topic);
     return NextResponse.json({ topic }, { status: 200 });
   } catch (error) {
     return NextResponse.json(

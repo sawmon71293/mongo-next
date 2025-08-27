@@ -1,12 +1,9 @@
 "use client";
+import { Topic } from "@/types/topic";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function Editing({
-  topic,
-}: {
-  topic: { _id: string; title: string; description: string };
-}) {
+export default function Editing(topic: Topic) {
   const [title, setTitle] = useState(topic?.title || "");
   const [description, setDescription] = useState(topic?.description || "");
 
@@ -14,7 +11,7 @@ export default function Editing({
   useEffect(() => {
     if (topic) {
       setTitle(topic.title);
-      setDescription(topic.description);
+      setDescription(topic.description ?? "");
     }
   }, [topic]);
 

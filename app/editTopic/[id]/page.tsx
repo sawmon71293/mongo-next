@@ -1,4 +1,5 @@
 import Editform from "@/components/EditForm";
+import { Topic } from "@/types/topic";
 
 const getTopicById = async (id: string) => {
   try {
@@ -24,10 +25,20 @@ interface EditTopicProps {
 export default async function EditTopic({ params }: EditTopicProps) {
   const resolveParams = await params;
   const { id } = resolveParams;
-  const { topic } = await getTopicById(id);
-  return (
-    <div>
-      <Editform topic={topic} />
-    </div>
-  );
+  const res = await getTopicById(id);
+  const topic: Topic = res?.topic ?? {};
+  console.log("Editing topic===>", topic);
+  if (!topic) {
+    return (
+      <div>
+        <p>No Topic Found</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Editform {...topic} />
+      </div>
+    );
+  }
 }
