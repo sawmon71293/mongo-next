@@ -12,11 +12,16 @@ const getTopicById = async (id: string) => {
   }
 };
 
-type EditTopicProps = {
-  params: { id: string };
-};
+interface EditTopicParams {
+  id: string;
+}
 
-export default async function EditTopic({ params: { id } }: EditTopicProps) {
+interface EditTopicProps {
+  params: Promise<EditTopicParams>;
+}
+export default async function EditTopic({ params }: EditTopicProps) {
+  const resolveParams = await params;
+  const { id } = resolveParams;
   const { topic } = await getTopicById(id);
   return (
     <div>
