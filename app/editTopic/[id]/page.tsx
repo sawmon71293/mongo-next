@@ -16,8 +16,7 @@ type EditTopicProps = {
   params: { id: string };
 };
 
-export default async function EditTopic({ params }: EditTopicProps) {
-  const { id } = params;
+export default async function EditTopic({ params: { id } }: EditTopicProps) {
   const { topic } = await getTopicById(id);
   return (
     <div>
