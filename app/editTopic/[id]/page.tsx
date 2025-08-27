@@ -12,14 +12,12 @@ const getTopicById = async (id: string) => {
   }
 };
 
-type PageProps = {
-  id: string;
+type EditTopicProps = {
+  params: { id: string };
 };
 
-export default async function editTopic({ id }: PageProps) {
-  console.log("Params id is:", id);
-  return "";
-  console.log("id is", id);
+export default async function EditTopic({ params }: EditTopicProps) {
+  const { id } = params;
   const { topic } = await getTopicById(id);
   return (
     <div>
