@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Removebtn from "./Removebtn";
 import { HiPencilAlt } from "react-icons/hi";
@@ -18,7 +19,8 @@ const getTopic = async () => {
 };
 
 export default async function TopicLists() {
-  const { topics } = await getTopic();
+  const data = await getTopic();
+  const topics: Topic[] = data?.topics ?? [];
   return (
     <>
       {topics &&

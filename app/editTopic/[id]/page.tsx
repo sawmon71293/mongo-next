@@ -2,7 +2,9 @@ import Editform from "@/components/EditForm";
 
 const getTopicById = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/topics/${id}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/topics/${id}`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch the topic");
     }
