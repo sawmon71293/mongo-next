@@ -1,28 +1,47 @@
 import connectDB from "@/libs/mongodb";
 import Topic from "@/models/topic";
 import { NextResponse } from "next/server";
+export const dynamic = "force-static";
 
 export async function PUT(request, { params }) {
+  try {
     const { id } = await params;
     const { title, description } = await request.json();
     await connectDB();
-    console.log(id)
-    console.log(title)
-    console.log(description)
     await Topic.findByIdAndUpdate(id, { title, description });
     return NextResponse.json({ message: "Topic Edited" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to edit topic" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function GET(request, { params }) {
+  try {
     const { id } = await params;
     await connectDB();
     const topic = await Topic.findOne({ _id: id });
     return NextResponse.json({ topic }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to find topic" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(request) {
+  try {
     const id = request.nextUrl.searchParams.get("id");
     await connectDB();
-    await Topic.findByIdAndDelete(id)
+    await Topic.findByIdAndDelete(id);
     return NextResponse.json({ topic }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete topic" },
+      { status: 500 }
+    );
+  }
 }
